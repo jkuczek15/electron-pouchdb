@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Electron PouchDB Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css" />
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container row" id="app">
+      <form class="col-md-4">
+        <div class="form-group row">
+          <div class="col-md-4">
+            <label for="username">Username</label>
+          </div>
+          <div class="col-md-8">
+            <input v-model="user._id" class="form-control" type="text" id="username" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-4">
+            <label for="first_name">First Name</label>
+          </div>
+          <div class="col-md-8">
+            <input v-model="user.first_name" class="form-control" type="text" id="first_name" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-4">
+            <label for="last_name">Last Name</label>
+          </div>
+          <div class="col-md-8">
+            <input v-model="user.last_name" class="form-control" type="text" id="last_name" />
+          </div>
+        </div>
+        <button v-on:click.prevent="createUser" class="btn btn-primary">Create User</button>
+      </form>
+      <div class="col-md-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="user in users" v-bind:key="user._id">
+              <td>{{ user._id }}</td>
+              <td>{{ user.first_name }}</td>
+              <td>{{ user.last_name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      require('./renderer.js')
+    </script>
+  </body>
+</html>
