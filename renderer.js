@@ -29,21 +29,12 @@ let app = new Vue({
   },
   methods: {
     createUser: function(){
-      let self = this
-      db.put(this.user).then(function (response) {
-        self.user = { type: 'user' }
-      }).catch(function (err) {
-        alert(err.message)
-      })
+      db.put(this.user).then((response) => this.user = {type: 'user'}).catch((err) => alert(err.message))
     },// end function createUser
 
     clearUsers: function(){
       if(confirm('Are you sure you want to delete all users?')){
-        db.find({
-          selector: {
-            type: 'user'
-          }
-        }).then(function(response){
+        db.find({selector: {type: 'user'}}).then((response) => {
           response.docs.forEach((user) => { user._deleted = true })
           db.bulkDocs(response.docs)
         })
@@ -51,14 +42,7 @@ let app = new Vue({
     }// end function clearUsers
   },
   created: function () {
-    let self = this
-    db.find({
-      selector: {
-        type: 'user'
-      }
-    }).then(function(response){
-      self.users = response.docs
-    })
+    db.find({selector: {type: 'user'}}).then((response) => this.users = response.docs)
   }// end vue created function
 })
 
