@@ -14,7 +14,6 @@ let db = new PouchDB('local_db')
 db.createIndex({
   index: {fields: ['type']}
 })
-// db.destroy()    // uncomment to destroy the database and recreate
 
 // Initialize our Vue application
 let app = new Vue({
@@ -32,11 +31,24 @@ let app = new Vue({
     createUser: function(){
       let self = this
       db.put(this.user).then(function (response) {
-        self.user = {}
+        self.user = { type: 'user' }
       }).catch(function (err) {
         alert(err.message)
       })
-    }// end function createUser
+    },// end function createUser
+
+    clearUsers: function(){
+      if(confirm('Are you sure you want to delete all users?')){
+        db.find({
+          selector: {
+            type: 'user'
+          }
+        }).then(function(response){
+          response.docs.forEach((user) => { user._deleted = true })
+          db.bulkDocs(response.docs)
+        })
+      }// end if confirmed delete
+    }// end function clearUsers
   },
   created: function () {
     let self = this
@@ -47,7 +59,7 @@ let app = new Vue({
     }).then(function(response){
       self.users = response.docs
     })
-  }// end created function
+  }// end vue created function
 })
 
 // listen for live databases changes and update our user list
@@ -56,5 +68,9 @@ db.changes({
   include_docs: true,
   live: true
 }).on('change', function(change){
-  app.users.push(change.doc)
+  if(change.deleted){
+    app.users = []
+  }else{
+    app.users.push(change.doc)
+  }// end if cleared all users
 })
