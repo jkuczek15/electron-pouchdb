@@ -51,7 +51,7 @@ db.changes({
   since: 'now',
   include_docs: true,
   live: true
-}).on('change', function(change){
+}).on('change', (change) => {
   if(change.deleted){
     app.users = []
   }else{
