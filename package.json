@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "rebuild": "electron-rebuild"
+    "rebuild": "electron-rebuild",
+    "rebuild-modules": "./node_modules/.bin/electron-rebuild"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -18,9 +19,11 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "4.0.3",
+    "electron-packager": "^13.1.1",
     "electron-rebuild": "^1.8.4"
   },
   "dependencies": {
+    "electron-builder": "^20.39.0",
     "jquery": "^3.4.0",
     "pouchdb": "^7.0.0",
     "pouchdb-find": "^7.0.0",
