@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "rebuild": "electron-rebuild",
-    "rebuild-modules": "./node_modules/.bin/electron-rebuild"
+    "rebuild-modules": "./node_modules/.bin/electron-rebuild",
+    "package": "./node_modules/.bin/electron-packager ./ electron-pouchdb"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -23,7 +24,6 @@
     "electron-rebuild": "^1.8.4"
   },
   "dependencies": {
-    "electron-builder": "^20.39.0",
     "jquery": "^3.4.0",
     "pouchdb": "^7.0.0",
     "pouchdb-find": "^7.0.0",
