@@ -24,7 +24,7 @@
     "electron-rebuild": "^1.8.4"
   },
   "dependencies": {
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "pouchdb": "^7.0.0",
     "pouchdb-find": "^7.0.0",
     "vue": "^2.6.10"
